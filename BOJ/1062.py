@@ -2,6 +2,7 @@ from itertools import combinations
 import sys
 input = sys.stdin.readline
 
+
 def cnt(c,n):
 
     cou = 0

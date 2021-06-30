@@ -11,5 +11,6 @@ if __name__ == "__main__":
     for i in range(2, 41):
         dp0[i] = dp0[i - 1] + dp0[i - 2]
         dp1[i] = dp1[i - 1] + dp1[i - 2]
+        
     for i in testCase:
         print(dp0[i],dp1[i])

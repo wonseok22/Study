@@ -1,6 +1,8 @@
 import sys
 input = sys.stdin.readline
 
+
+
 if __name__ == "__main__":
     ans = 1
     for i in range(1,int(input())+1,1):

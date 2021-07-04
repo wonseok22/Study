@@ -1,6 +1,7 @@
 import sys
 from collections import deque
 
+
 def bfs(start):
     queue = deque([start])
     length = [-1 for _ in range(V+1)]

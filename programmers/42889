@@ -1,3 +1,4 @@
+
 def solution(N, stages):
     answer = {}
     l = len(stages)

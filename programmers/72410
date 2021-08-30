@@ -1,0 +1,50 @@
+def solution(new_id):
+    answer = ''
+    # 1단계
+    new_id = new_id.lower()
+    # 2단계
+    nid = ''
+    for value in new_id:
+        if 97 <= ord(value) <= 122 or "0" <= value <= "9" or value == "-" or value == "_" or value == ".":
+            nid += value
+    # 3단계
+    flag = True
+    new_id = ''
+    for value in nid:
+        if value == ".":
+            if flag:
+                new_id += value
+                flag = False
+        else:
+            new_id += value
+            flag = True
+    # 4단계
+    if new_id:
+        if new_id[0] == ".":
+            if len(new_id) >= 2:
+                new_id = new_id[1:]
+            else:
+                new_id = ""
+    if new_id:
+        if new_id[-1] == ".":
+            if len(new_id) >= 2:
+                new_id = new_id[:-1]
+            else:
+                new_id = ""
+    # 5단계
+    if not new_id:
+        new_id = "a"
+    
+    # 6단계
+    if len(new_id) >= 16:
+        new_id = new_id[:15]
+        if new_id[-1] == ".":
+            new_id = new_id[:-1]
+    
+    # 7단계
+    if len(new_id) <= 2:
+        while len(new_id) <= 2:
+            new_id += new_id[-1]
+    
+            
+    return new_id

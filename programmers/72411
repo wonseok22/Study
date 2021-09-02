@@ -1,0 +1,17 @@
+from itertools import combinations
+from collections import Counter
+def solution(orders, course):
+    answer = []
+    for c in course:
+        lst = []
+        for s in orders:
+            l = [''.join(i) for i in combinations(sorted(s),c)]
+            lst += l
+        cnt = Counter(lst).most_common()
+        m = 2
+        for key in cnt:
+            if key[1] >= m:
+                m = key[1]
+                answer.append(key[0])
+
+    return sorted(answer)

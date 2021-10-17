@@ -1,1 +1,1 @@
-# my study records
+# my study records using PYTHON

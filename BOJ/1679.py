@@ -1,20 +1,23 @@
-from itertools import combinations
 
 if __name__ == "__main__":
     N = int(input())
     nums = list(map(int,input().split()))
     K = int(input())
-    nums = nums*K
-    S = []
-    for i in range(1,K+1):
-        L = list(combinations(nums,i))
-        for idx in L:
-            S.append(sum(idx))
-    S = list(set(S))
-    for idx in range(len(S)):
-        if S[idx] != idx+1:
-            if idx%2 == 1:
-                print("holsoon win at",idx+1)
+    i = 0
+    arr = [0]*1020
+    for i in nums:
+        arr[i] = 1
+    print(arr)
+    print(nums)
+    while True:
+        for j in nums:
+            if arr[j] + arr[i] < arr[j]+i or arr[j+i] == 0:
+                print(arr[j],arr[i])
+                arr[j+1] = arr[j]+arr[i]
+        if arr[i] > K:
+            if i%2 == 0:
+                print("holsoon win at"+i)
             else:
-                print("jjaksoon win at",idx+1)
+                print("jjaksoon win at" + i)
             break
+        i+=1

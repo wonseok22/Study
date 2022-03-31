@@ -20,4 +20,4 @@ if __name__ == "__main__":
             if 10 < x2 < 27:
                 ans[i] += ans[i-2]
             ans[i] %= 1000000
-        print(ans[-1])
+        print(ans[len(N)-1])

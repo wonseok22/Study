@@ -1,16 +1,23 @@
-test_case = int(input())
+import sys
+input = sys.stdin.readline
 
-for i in range(test_case):
-    number = int(input())
-    X = []
-    for _ in range(number):
-        X.append(input())
-    K = X.sorted()
-    answer = 'YES'
-    for idx, val in enumerate(K):
-        if idx == len(K) - 1:
+for _ in range(int(input())):
+    dic = dict()
+    nums = list(input().strip().replace(" ", "") for _ in range(int(input())))
+    for i in nums:
+        dic[i] = 1
+    flag = True
+    for i in nums:
+        s = ""
+        for j in i:
+            s += j
+            if s in dic and s != i:
+                print("NO")
+                flag = False
+                break
+        if not flag:
             break
-        if val in K[idx + 1]:
-            answer = 'NO'
-    print(answer)
+    if flag:
+        print("YES")
+
 

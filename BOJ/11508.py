@@ -1,7 +1,6 @@
 import sys
 input = sys.stdin.readline
 
-
 if __name__ == "__main__":
     N = int(input())
     price = sorted([int(input()) for _ in range(N)],reverse=True)

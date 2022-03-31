@@ -1,10 +1,46 @@
-import sys
 from collections import deque
-input = sys.stdin.readline
+import sys
 
-if __name__ == "__main__":
-    for _ in range(int(input())):
-        c = deque(list(input().strip()))
-        N = int(input())
-        arr = list(input().strip())
-        print(arr)
+T = int(sys.stdin.readline())  # 테스트케이스 수
+
+errFlag = False
+for _ in range(T):
+    p = sys.stdin.readline()  # 함수
+    n = int(sys.stdin.readline())  # 배열 속 수의 개수
+    arr = sys.stdin.readline()[1:-2].split(",")
+
+    if arr[0] != '':
+        arr = deque(arr)
+    else:
+        arr = deque()
+
+    direction_Flag = True
+
+    for i in p:
+        if i == "R":
+            if direction_Flag == True:
+                direction_Flag = False
+            elif direction_Flag == False:
+                direction_Flag = True
+        elif i == "D":
+            if len(arr) == 0:
+                print("error")
+                errFlag = True
+                break
+
+            if direction_Flag == True:
+                arr.popleft()
+            elif direction_Flag == False:
+                arr.pop()
+
+    if p.count('R') % 2 != 0:
+        arr.reverse()
+
+    if errFlag == False:
+        print("[", end="")
+        for i in range(len(arr)):
+            print(arr[i], end="")
+            if i != len(arr) - 1:
+                print(",", end="")
+        print("]")
+    errFlag = False

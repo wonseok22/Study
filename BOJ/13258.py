@@ -1,0 +1,5 @@
+N = int(input())
+cash = list(map(int,input().split()))
+j = int(input())
+C = int(input())
+print(cash[0] + (cash[0]/sum(cash)) * C * j)

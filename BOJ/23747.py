@@ -24,6 +24,8 @@ def ward(R,C, check): # 와드 설치
                 answer[ax][ay] = "."
                 queue.append([ax,ay])
 
+
+
 N, M = map(int,input().split())
 board = [list(input().strip()) for _ in range(N)]
 answer = [["#" for _ in range(M)] for _ in range(N)]

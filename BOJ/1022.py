@@ -1,16 +1,28 @@
-hurricane = [[37, 36, 35, 34, 33, 32, 31]
-            ,[38, 17, 16, 15, 14, 13, 30]
-            ,[39, 18,  5,  4,  3, 12, 29]
-            ,[40, 19,  6,  1,  2, 11, 28]
-            ,[41, 20,  7,  8,  9, 10, 27]
-            ,[42, 21, 22, 23, 24, 25, 26]
-            ,[43, 44, 45, 46, 47, 48, 49]]
+dx = [-1, 0, 1, 0]
+dy = [0, 1, 0, -1]
+
 r1,c1,r2,c2 = map(int,input().split())
-r1 += 3
-c1 += 3
-r2 += 3
-c2 += 3
-for i in range(r1,r2+1):
-    for j in range(c1, c2+1):
-        print(hurricane[i][j], end=" ")
-    print("")
+hurricane = [[0 for _ in range(c2-c1+1)] for _ in range(r2-r1+1)]
+total = (c2-c1+1) * (r2-r1+1)
+direction = 1
+x = 0
+y = 0
+cnt = 1
+l = 1
+while total > 0:
+    for _ in range(2):
+        for _ in range(l):
+            if r1 <= x <= r2 and c1 <= y <= c2:
+                hurricane[x - r1][y - c1] = cnt
+                total -= 1
+                m = cnt
+            x += dx[direction]
+            y += dy[direction]
+            cnt += 1
+        direction = (direction-1) % 4
+    l += 1
+max_len = len(str(m))
+for i in range(r2-r1+1):
+    for j in range(c2-c1+1):
+        print(str(hurricane[i][j]).rjust(max_len), end=" ")
+    print()

@@ -25,6 +25,8 @@ for i in range(1,N):
                 print(min(price[i][1], total_price)) # 같은가격의 고기를 모두 사는것 vs 그 다음으로 비싼 고기를 사는 것 비교
             else:
                 print(total_price) # 다음으로 비싼 고기가 없으면 어쩔 수 없이 같은가격의 고기를 사야됨
+                
+                
             exit()
 
 print(-1)

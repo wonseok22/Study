@@ -1,30 +1,34 @@
-def bfs(start,end):
-    queue = [start]
-    cnt = 1
-    while queue:
-        X = queue[0]
-        del queue[0]
-        for L in link[X]:
-            if L == end:
-                return cnt
-            if visit[L] == 0 and L != start:
-                print(L,X)
-                visit[L] = 1
-                queue.append(L)
-        cnt+=1
-    return -1
-"""        1
-    2       3
-4  5  6    7"""
+import sys
+from collections import deque
+input = sys.stdin.readline
 
-if __name__ == "__main__":
-    n = int(input())
-    start,end = map(int,input().split())
-    m = int(input())
-    visit = [0 for _ in range(n+1)]
-    link = [[] for _ in range(n+1)]
-    for _ in range(m):
-        x,y = map(int,input().split())
-        link[x].append(y)
-        link[y].append(x)
-    print(bfs(start,end))
+def dfs(curr_node):
+    for i in graph[curr_node]:
+        if visited[i] == -1:
+            visited[i] = visited[curr_node] + 1
+            dfs(i)
+
+def bfs(curr_node):
+    queue = deque()
+    queue.append(curr_node)
+    while queue:
+        x = queue.popleft()
+        for i in graph[x]:
+            if visited[i] == -1:
+                visited[i] = visited[x] + 1
+                queue.append(i)
+
+
+N = int(input())
+target_start, target_end = map(int,input().split())
+graph = [[] for _ in range(N+1)]
+visited = [-1 for _ in range(N+1)]
+for _ in range(int(input())):
+    a,b = map(int,input().split())
+    graph[a].append(b)
+    graph[b].append(a)
+visited[target_start] = 0
+#dfs(target_start)
+bfs(target_start)
+print(visited[target_end])
+

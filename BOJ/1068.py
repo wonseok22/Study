@@ -1,26 +1,35 @@
-
-
-if __name__ == "__main__":
-    treelen = int(input())
-    T = list(map(int,input().split()))
-    d_node = int(input())
-    tree = {}
-    for i in range(treelen):
-        if i == d_node or T[i] == d_node:
-            continue
-        if T[i] in tree:
-            tree[T[i]].append(i)
-        else:
-            tree[T[i]] = [i]
-    res = 0
-    if -1 in tree:
-        que = [-1]
+import sys
+from collections import deque
+input = sys.stdin.readline
+answer = 0
+N = int(input())
+tree = [[] for _ in range(N)]
+visited = [False for _ in range(N)]
+root = 0
+for idx, parent in enumerate(list(map(int,input().split()))):
+    if parent == -1:
+        root = idx
     else:
-        que = []
-    while que:
-        node = que.pop()
-        if node not in tree:
-            res +=1
-        else:
-            que += tree[node]
-    print(res)
+        tree[parent].append(idx)
+delete = int(input())
+if delete == root:
+    print(0)
+    exit()
+visited[root] = True
+visited[delete] = True
+queue = deque()
+queue.append(root)
+while queue:
+    flag = True
+    x = queue.popleft()
+    if tree[x]:
+        for i in tree[x]:
+            if not visited[i]:
+                queue.append(i)
+                visited[i] = True
+                flag = False
+        if flag:
+            answer += 1
+    else:
+        answer += 1
+print(answer)

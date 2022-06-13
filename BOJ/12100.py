@@ -36,7 +36,7 @@ def left(board):
                             answer = max(answer, board[i][k])
                             break
                         else:
-                            board[]
+                            board[i][j]
     print("left")
     print(*board,sep='\n')
     return board

@@ -10,11 +10,10 @@ for i in range(N):
             house.append([i, j])
         elif board[i][j] == 2:
             chicken.append([i, j])
-answer = 1000000000
+answer = float("inf")
 for check in combinations(chicken, M):
     S = 0
     for h in house:
         S += min([abs(h[0] - i[0]) + abs(h[1] - i[1]) for i in check])
-    if S < answer:
-        answer = S
+    answer = min(S, answer)
 print(answer)

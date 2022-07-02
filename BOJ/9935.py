@@ -1,11 +1,12 @@
-import sys, re
-input = sys.stdin.readline
+# import sys, re
+# input = sys.stdin.readline
+#
+# S = input().strip()
+# del_S = input().strip()
+# while re.findall(del_S,S):
+#     S = S.replace(del_S,"")
+# print(S) if S else print("FRULA")
 
-S = input().strip()
-del_S = input().strip()
-while re.findall(del_S,S):
-    S = S.replace(del_S,"")
-print(S) if S else print("FRULA")
 
 import sys
 input = sys.stdin.readline

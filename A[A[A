@@ -29,3 +29,6 @@ remote.origin.url=https://github.com/wonseok22/Study
 remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
 branch.main.remote=origin
 branch.main.merge=refs/heads/main
+
+
+

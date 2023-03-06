@@ -16,3 +16,7 @@ for i in range(N):
     selected.popleft()
     selected.append(sushi[(i+K) % N])
 print(answer)
+
+
+
+

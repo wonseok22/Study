@@ -6,6 +6,7 @@ def solve(cnt, value):
 
     if cnt == 11:
         answer = max(answer, value)
+
         return
     for i in range(11):
         if visited[i] or member[cnt][i] == 0:continue

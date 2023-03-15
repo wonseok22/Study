@@ -4,7 +4,6 @@ input = sys.stdin.readline
 def select(n):
     return [((n+2)//2)*2, ((n+2)//2)*2 + 1]
 
-
 def solve(cnt, value):
     global answer
     if value >= answer:

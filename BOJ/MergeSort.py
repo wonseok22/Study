@@ -31,14 +31,10 @@ def merge_sort(list):
     return merge(left_list, right_list)
 
 def quick_sort(list):
-    # 길이가 1 이하일 경우 배열을 반환
+
     if len(list) <= 1:
         return list
 
-    # 배열을 왼쪽, pivot, 오른쪽으로 나누어 재귀호출한다.
-    # 왼쪽 : pivot보다 작은 값
-    # pivot : pivot과 같은 값
-    # 오른쪽 : pivot보다 큰 값
     pivotpoint = list[len(list)//2]
     left, pivot, right = [], [], []
     for i in list:

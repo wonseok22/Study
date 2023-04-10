@@ -164,76 +164,76 @@ category = [
 #         conn.commit()
 #         print(result,"저장되었습니다.")
 #     conn.close()
-def regist_food():
-    df = pd.read_excel('C:/Users/SSAFY/Downloads/영양소 최종본 입력용.xlsx')
-    sum_of_nutrient = [0 for _ in range(24)]
-    for index in range(1, 24):
-        sum_of_nutrient[index] = df[index].sum()
-    for row in range(len(df.index)):
-        name = df['식품명'][row]
-        description = df['설명'][row]
-        time = df['조리시간'][row]
-        efficiency = df['효능'][row]
-        amount = df['1회제공량'][row]
-        unit = df['내용량_단위'][row]
-        ing = df["재료"][row]
-        cat = df["카테고리"][row]
-        cat = str(cat)
-        cat = cat.split(",")
-        print(name)
-        if pd.isna(ing):
-            print("재료 비어있음!!@", name)
-            continue
-        ingredients = df["재료"][row].split(",")
-        url = df["url"][row]
-        query = "SELECT * FROM food where name ='" + name + "'; " # 중복체크
-        cursor.execute(query)
-        r = cursor.fetchone()
-        if r:
-            print("이미 있는 음식입니다.", name)
-            continue
-        if pd.isna(description) or pd.isna(efficiency)  or pd.isna(url) or pd.isna(time):
-            print("완성되지 않은 음식" , name)
-            continue
-        query = "INSERT INTO pnut.food (name, description, time, efficiency, amount, unit, ingredients, url) VALUES('"+name+"','"+description+"',"+str(time)+",'"+efficiency +"'," + str(amount) + ",'" + unit + "','" + ing + "','" + url +"');"
-        cursor.execute(query)
-        conn.commit()
-        query = "SELECT * FROM food where name ='" + name + "'; " #몇 번 요리인지 확인
-        cursor.execute(query)
-        r = cursor.fetchone()
-        food_id = r[0]
-        print(food_id, "food_id는?")
-        print("인덱스 = ", r[0])
-        for i in cat:
-            query = 'INSERT INTO pnut.food_cat(food_id, cat_id) VALUES(' + str(food_id) + ','+ str(i) + ');'
-            cursor.execute(query)
-            conn.commit()
-        for i in ingredients:
-            index = 0
-            query = "SELECT * FROM pnut.ingredient WHERE name ='" + i + "';"
-            cursor.execute(query)
-            r = cursor.fetchone()
-            if r:
-                index = r[0]
-            else:
-                query = "INSERT INTO pnut.ingredient (name) VALUES('"+ i +"');"
-                cursor.execute(query)
-                conn.commit()
-                query = "SELECT * FROM pnut.ingredient WHERE name ='" + i + "';"
-                cursor.execute(query)
-                r = cursor.fetchone()
-                index=r[0]
-            query = "INSERT INTO pnut.food_ingre (ingredient_id, food_id) VALUES(" + str(index) + "," + str(food_id) + ");"
-            cursor.execute(query)
-        conn.commit()
-        for index in range(1, 24):
-            if df[index][row] == '-' or df[index][row] == 0: continue
-            nutrient = float(df[index][row])
-            nutrient_percent = nutrient/sum_of_nutrient[index]
-            query = "INSERT INTO pnut.food_nut (nutrient_id, food_id, weight, weight_percent) VALUES(" + str(index) + "," + str(food_id) + "," + str(nutrient) + "," + str(nutrient_percent) +")"
-            cursor.execute(query)
-        conn.commit()
-regist_food()
+# def regist_food():
+#     df = pd.read_excel('C:/Users/SSAFY/Downloads/영양소 최종본 입력용.xlsx')
+#     sum_of_nutrient = [0 for _ in range(24)]
+#     for index in range(1, 24):
+#         sum_of_nutrient[index] = df[index].sum()
+#     for row in range(len(df.index)):
+#         name = df['식품명'][row]
+#         description = df['설명'][row]
+#         time = df['조리시간'][row]
+#         efficiency = df['효능'][row]
+#         amount = df['1회제공량'][row]
+#         unit = df['내용량_단위'][row]
+#         ing = df["재료"][row]
+#         cat = df["카테고리"][row]
+#         cat = str(cat)
+#         cat = cat.split(",")
+#         print(name)
+#         if pd.isna(ing):
+#             print("재료 비어있음!!@", name)
+#             continue
+#         ingredients = df["재료"][row].split(",")
+#         url = df["url"][row]
+#         query = "SELECT * FROM food where name ='" + name + "'; " # 중복체크
+#         cursor.execute(query)
+#         r = cursor.fetchone()
+#         if r:
+#             print("이미 있는 음식입니다.", name)
+#             continue
+#         if pd.isna(description) or pd.isna(efficiency)  or pd.isna(url) or pd.isna(time):
+#             print("완성되지 않은 음식" , name)
+#             continue
+#         query = "INSERT INTO pnut.food (name, description, time, efficiency, amount, unit, ingredients, url) VALUES('"+name+"','"+description+"',"+str(time)+",'"+efficiency +"'," + str(amount) + ",'" + unit + "','" + ing + "','" + url +"');"
+#         cursor.execute(query)
+#         conn.commit()
+#         query = "SELECT * FROM food where name ='" + name + "'; " #몇 번 요리인지 확인
+#         cursor.execute(query)
+#         r = cursor.fetchone()
+#         food_id = r[0]
+#         print(food_id, "food_id는?")
+#         print("인덱스 = ", r[0])
+#         for i in cat:
+#             query = 'INSERT INTO pnut.food_cat(food_id, cat_id) VALUES(' + str(food_id) + ','+ str(i) + ');'
+#             cursor.execute(query)
+#             conn.commit()
+#         for i in ingredients:
+#             index = 0
+#             query = "SELECT * FROM pnut.ingredient WHERE name ='" + i + "';"
+#             cursor.execute(query)
+#             r = cursor.fetchone()
+#             if r:
+#                 index = r[0]
+#             else:
+#                 query = "INSERT INTO pnut.ingredient (name) VALUES('"+ i +"');"
+#                 cursor.execute(query)
+#                 conn.commit()
+#                 query = "SELECT * FROM pnut.ingredient WHERE name ='" + i + "';"
+#                 cursor.execute(query)
+#                 r = cursor.fetchone()
+#                 index=r[0]
+#             query = "INSERT INTO pnut.food_ingre (ingredient_id, food_id) VALUES(" + str(index) + "," + str(food_id) + ");"
+#             cursor.execute(query)
+#         conn.commit()
+#         for index in range(1, 24):
+#             if df[index][row] == '-' or df[index][row] == 0: continue
+#             nutrient = float(df[index][row])
+#             nutrient_percent = nutrient/sum_of_nutrient[index]
+#             query = "INSERT INTO pnut.food_nut (nutrient_id, food_id, weight, weight_percent) VALUES(" + str(index) + "," + str(food_id) + "," + str(nutrient) + "," + str(nutrient_percent) +")"
+#             cursor.execute(query)
+#         conn.commit()
+
 # while True:
 #     print("설문 내용 입력")
 #     content = input()
@@ -246,14 +246,12 @@ regist_food()
 #     conn.commit()
 
 
-# for category_name in category:
-#     query = "SELECT * FROM pnut.category where category_name ='" + category_name + "'; "
-#     cursor.execute(query)
-#     if cursor.fetchall():
-#         print("이미 있는 영양소입니다.")
-#         continue
-#     query = "INSERT INTO pnut.category (category_name) VALUES('" + category_name + "');"
-#     cursor.execute(query)
-#     conn.commit()
+query = "SELECT * FROM pnut.food_nut WHERE nutrient_id=1"
+cursor.execute(query)
+for c in cursor.fetchall():
+    query = "UPDATE pnut.food SET cal =" + str(c[3]) + " WHERE food_id = " + str(c[2]) + ";"
+    cursor.execute(query)
+    conn.commit()
+conn.commit()
 
 

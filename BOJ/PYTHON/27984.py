@@ -31,6 +31,7 @@ def is_onepair():
 
 
 
+
 card = [[],[]]
 
 for _ in range(4):

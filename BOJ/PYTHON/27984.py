@@ -20,7 +20,6 @@ def is_flush():
 
 def is_straight():
 
-
 def is_triple():
 
 
